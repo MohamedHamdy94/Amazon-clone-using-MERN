@@ -9,6 +9,7 @@ productRouter.get("/", async (req, res) => {
   res.send(products);
 });
 
+
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -18,6 +19,13 @@ productRouter.get("/slug/:slug", async (req, res) => {
   }
 });
 
+productRouter.get(
+  "/categories",
+  expressAsyncHandler(async (req, res) => {
+    const categories = await Product.find().distinct("category");
+    res.send(categories);
+  })
+);
 productRouter.get("/:id", async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -71,6 +79,7 @@ productRouter.put(
         numReviews: req.body.numReviews,
         description: req.body.description,
       });
+      // res.send(product)
     } else {
       res.status(404).send({ message: "product not found" });
     }
