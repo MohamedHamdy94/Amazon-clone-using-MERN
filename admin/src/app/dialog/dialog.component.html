@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Add Product form</h1>
+<div mat-dialog-content>
+  <form [formGroup]="protectForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input formControlName="name" matInput placeholder="Placeholder">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>slug</mat-label>
+      <input formControlName="slug" matInput placeholder="slug">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Category</mat-label>
+      <mat-select formControlName="category"  placeholder="Category">
+        <mat-option  value=" laptop">laptop</mat-option>
+        <mat-option  value=" Mobail">Mobail</mat-option>
+        <mat-option  value=" Watches">Watches</mat-option>
+        <mat-option  value=" Earbuds">Earbuds</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Image</mat-label>
+    <input formControlName="image" matInput value="/images/">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <input formControlName="price" matInput type="number" placeholder="Placeholder">
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Count In Stock</mat-label>
+    <input formControlName="countInStock" matInput type="number" placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>brand</mat-label>
+    <input formControlName="brand" matInput placeholder="brand">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>rating</mat-label>
+    <input formControlName="rating" matInput type="number" placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Number Reviews</mat-label>
+    <input formControlName="numReviews" matInput type="number" placeholder="Placeholder">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea formControlName="description" matInput placeholder="description"></textarea>
+  </mat-form-field>
+
+
+</form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>close</button>
+  <button mat-raised-button color="primary" (click)="addProduct()" >{{actionButn}}</button>
+
+</div>

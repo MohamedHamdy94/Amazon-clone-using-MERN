@@ -1,0 +1,14 @@
+
+.container {
+  min-height: 100%;
+  width: 100%;
+}
+li{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 40vw;
+}
+// .nav{
+//   margin: 10px;
+// }

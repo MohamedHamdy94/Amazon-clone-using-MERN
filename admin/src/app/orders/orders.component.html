@@ -1,0 +1,96 @@
+<app-navbar class="nav"></app-navbar>
+
+<div
+  *ngFor="let order of order "
+  style="width: 97vw; padding: 0 0.5rem; margin: 10px"
+>
+  <mat-card
+    class="card"
+    class="container"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutWrap
+    fxLayoutGap="0.5%"
+    fxLayoutAlign="space-between"
+  >
+
+    <div>
+      <mat-card-title>{{ order.shippingAddress.fullname }}</mat-card-title>
+      <mat-card-subtitle
+        ><strong>Address : </strong>
+        {{ order.shippingAddress.address }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>city :</strong>
+        {{ order.shippingAddress.city }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>country :</strong>
+        {{ order.shippingAddress.country }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>postalCode : </strong
+        >{{ order.shippingAddress.postalCode }}</mat-card-subtitle
+      >
+    </div>
+
+    <mat-card-subtitle>
+      <div *ngFor="let items of order.orderItems">
+        <ul>
+          <li>
+            <span><strong> name : </strong>{{ items.name }}</span>
+            <span><strong> items quantity :</strong> {{ items.quantity }}</span
+            ><span
+              ><strong> items price : </strong
+              >{{ items.price | currency }}</span
+            >
+          </li>
+        </ul>
+      </div>
+    </mat-card-subtitle>
+
+    <div>
+      <mat-card-subtitle
+        ><strong>shipping Price :</strong>
+        {{ order.shippingPrice | currency }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>tax Price :</strong>
+        {{ order.taxPrice | currency }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>total Price :</strong>
+        {{ order.totalPrice | currency }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>created At :</strong>
+        {{ order.createdAt | date }}</mat-card-subtitle
+      >
+    </div>
+
+    <app-user-child [order]="order"></app-user-child>
+    <!-- <mat-card-subtitle
+        ><strong>User Name :</strong>
+        {{ user.name }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>User Email :</strong>
+        {{ user.email }}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        ><strong>User id :</strong>
+        {{ user._id }}</mat-card-subtitle
+      > -->
+
+    <div>
+      <button
+        mat-icon-button
+        color="warn"
+        mat-dialog-close=""
+        (click)="deleteOrder(order)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>
