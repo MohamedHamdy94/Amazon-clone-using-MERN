@@ -1,3 +1,20 @@
 mat-form-field{
   width: 100%;
+  margin-bottom : 10px
+}
+
+img{
+  width: 80px;
+}
+.form-control{
+  width: 60%;
+}
+.example-full-width{
+width: 100%;
+}
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }

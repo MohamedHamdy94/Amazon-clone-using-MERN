@@ -1,0 +1,30 @@
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+img {
+  width: 80px;
+}
+
+.form-control {
+  width: 60%;
+}
+
+.example-full-width {
+  width: 65%;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=dialog.component.css.map */

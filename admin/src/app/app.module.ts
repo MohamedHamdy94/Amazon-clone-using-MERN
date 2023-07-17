@@ -28,7 +28,18 @@ import { UserChildComponent } from './user-child/user-child.component';
 import { RequestInterceptor } from './request.interceptor';
 import { AuthService } from './shared/auth.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+// import { DemoFileComponent } from './demo-file.compoenent';
+// import { MatFileUploadModule } from 'angular-material-fileupload';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
 
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [
@@ -40,6 +51,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     LoginComponent,
     UsersComponent,
     UserChildComponent,
+    MatConfirmDialogComponent,
+    OrderDetailsComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +73,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatSortModule,
     MatCardModule,
     FlexLayoutModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatGridListModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatListModule,
+    MatChipsModule,
+    MaterialFileInputModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,

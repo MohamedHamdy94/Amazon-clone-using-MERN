@@ -3,65 +3,130 @@
   <form [formGroup]="protectForm">
     <mat-form-field appearance="outline">
       <mat-label>Product Name</mat-label>
-      <input formControlName="name" matInput placeholder="Placeholder">
+      <input formControlName="name" matInput placeholder="Placeholder" />
+      <mat-error *ngIf="formControls['name'].touched ">
+        Product Name is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>slug</mat-label>
-      <input formControlName="slug" matInput placeholder="slug">
+      <mat-label>Slug</mat-label>
+      <input formControlName="slug" matInput placeholder="slug" />
+      <mat-error *ngIf="formControls['slug'].touched ">
+        Slug is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Product Category</mat-label>
-      <mat-select formControlName="category"  placeholder="Category">
-        <mat-option  value=" laptop">laptop</mat-option>
-        <mat-option  value=" Mobail">Mobail</mat-option>
-        <mat-option  value=" Watches">Watches</mat-option>
-        <mat-option  value=" Earbuds">Earbuds</mat-option>
+      <mat-select formControlName="category" placeholder="Category">
+        <mat-option value=" laptop">laptop</mat-option>
+        <mat-option value=" Mobail">Mobail</mat-option>
+        <mat-option value=" Watches">Watches</mat-option>
+        <mat-option value=" Earbuds">Earbuds</mat-option>
       </mat-select>
+      <mat-error *ngIf="formControls['category'].touched ">
+        Product Category is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="flex">
+
+      <mat-form-field class="example-full-width">
+        <mat-label> Image</mat-label>
+        <ngx-mat-file-input   formControlName="image" placeholder="Select Image" valuePlaceholder="No image file selected"
+          [errorStateMatcher]="matcher"
+
+
+
+           ></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+        <mat-error>
+          <span *ngIf="!protectForm.get('image')?.valid">Please select image file</span>
+        </mat-error>
+      </mat-form-field>
+        <div *ngIf="imageData">
+        <img [src]="imageData" [alt]="protectForm.value.name" />
+      </div>
+    </div>
+
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Price</mat-label>
+      <input
+        formControlName="price"
+        matInput
+        type="number"
+        placeholder="Placeholder"
+      />
+      <mat-error *ngIf="formControls['price'].touched ">
+        Price is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Image</mat-label>
-    <input formControlName="image" matInput value="/images/">
-  </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Count In Stock</mat-label>
+      <input
+        formControlName="countInStock"
+        matInput
+        type="number"
+        placeholder="Placeholder"
+      />
+      <mat-error *ngIf="formControls['countInStock'].touched ">
+        count In Stock is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Price</mat-label>
-    <input formControlName="price" matInput type="number" placeholder="Placeholder">
-  </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>brand</mat-label>
+      <input formControlName="brand" matInput placeholder="brand" />
+      <mat-error *ngIf="formControls['brand'].touched ">
+        brand is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
 
+    <!-- <mat-form-field class="form-field" appearance="outline">
+      <mat-label>rating</mat-label>
+      <input
+        formControlName="rating"
+        matInput
+        type="number"
+        placeholder="Placeholder"
+      />
+      <mat-error
+      *ngIf=" !formControls['rating'].valid
+      " >
+        not <strong>valid </strong>Maximum number allowed is 5
+      </mat-error>
+      <mat-error *ngIf="formControls['rating'].touched ">
+        rating is <strong>required</strong>
+      </mat-error>
+    </mat-form-field> -->
 
-  <mat-form-field appearance="outline">
-    <mat-label>Count In Stock</mat-label>
-    <input formControlName="countInStock" matInput type="number" placeholder="Placeholder">
-  </mat-form-field>
+    <!-- <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Number Reviews</mat-label>
+      <input
+        formControlName="numReviews"
+        matInput
+        type="number"
+        placeholder="Placeholder"
+      />
+    </mat-form-field> -->
 
-  <mat-form-field appearance="outline">
-    <mat-label>brand</mat-label>
-    <input formControlName="brand" matInput placeholder="brand">
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>rating</mat-label>
-    <input formControlName="rating" matInput type="number" placeholder="Placeholder">
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Number Reviews</mat-label>
-    <input formControlName="numReviews" matInput type="number" placeholder="Placeholder">
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Description</mat-label>
-    <textarea formControlName="description" matInput placeholder="description"></textarea>
-  </mat-form-field>
-
-
-</form>
+    <mat-form-field class="form-field"  appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea
+        formControlName="description"
+        matInput
+        placeholder="description"
+      ></textarea>
+      <mat-error *ngIf="formControls['description'].touched ">
+        Description is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions [align]="'end'">
   <button mat-raised-button color="warn" mat-dialog-close>close</button>
-  <button mat-raised-button color="primary" (click)="addProduct()" >{{actionButn}}</button>
-
+  <button mat-raised-button color="primary" (click)="addProduct()">
+    {{ actionButn }}
+  </button>
 </div>

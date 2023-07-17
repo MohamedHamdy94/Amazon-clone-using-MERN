@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   resData:any;
   ngOnInit(): void {
-    if (localStorage.getItem('userInfo')) {
+    if (localStorage.getItem('token')) {
       this.router.navigate(['products']);
     }
     this.loginForm = this.fb.group({

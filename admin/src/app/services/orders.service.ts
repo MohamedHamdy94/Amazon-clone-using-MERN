@@ -15,6 +15,18 @@ export class OrdersService {
     return this.http.delete<any>(`/api/orders/${order._id}`,order);
   }
   getInfo() {
-    return this.http.get<any>(`/api/orders/summary` );
+    return this.http.get<any>(`/api/orders/adminsummary`);
+  }
+  notDeliverd(data:any){
+    return this.http.put<any>(`/api/orders/notDeliverd/${data._id}`,data);
+
+  }
+  deliverd(data:any){
+    return this.http.put<any>(`/api/orders/deliverd/${data._id}`,data);
+
+  }
+  getOrder(id:any){
+    return this.http.get<any>(`/api/orders/${id}`);
+
   }
 }

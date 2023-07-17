@@ -9,34 +9,32 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { Users } from '../interfaces/users';
+import { DailogService } from '../shared/dailog.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
-  products: string[] = [
-    'name',
-    'email',
-    'action'
-  ];
+  products: string[] = ['name', 'email', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: UsersService,private dialog : MatDialog,private router:Router) {}
+  constructor(
+    private api: UsersService,
+    private dialog: MatDialog,
+    private router: Router,
+    private dailogService: DailogService
+  ) {}
 
   ngOnInit(): void {
-
-     this.getAllusers();
-
-
+    this.getAllusers();
   }
   getAllusers() {
     this.api.getusers().subscribe({
-      next: (res:Users[]) => {
+      next: (res: Users[]) => {
         console.log(res);
         this.dataSource = new MatTableDataSource(res);
 
@@ -60,16 +58,29 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  delete(row: any) {
+    // this.api.deleteuser(row).subscribe(() =>{
 
-  delete(row:any) {
-  this.api.deleteuser(row).subscribe(() =>{
-
-
-  },(error) => {
-        alert('Error user not deleted');
-      }
-      )
-      window.location.reload() ;
-    }
+    // },(error) => {
+    //       alert('Error user not deleted');
+    //     }
+    //     )
+    //     window.location.reload() ;
+    this.dailogService
+      .openConfirmDialog('Are you sure to delete this user ?')
+      .afterClosed()
+      .subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.api.deleteuser(row).subscribe(
+            () => {},
+            (error) => {
+              console.log(error)
+              alert('Error user not deleted');
+            }
+          );
+          window.location.reload();
+        }
+      });
+  }
 }
-

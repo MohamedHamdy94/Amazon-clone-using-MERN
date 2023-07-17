@@ -8,5 +8,4 @@ export interface Products {
     price: Number;
     countInStock: Number;
     rating: Number;
-    numReviews: Number;
 }[]

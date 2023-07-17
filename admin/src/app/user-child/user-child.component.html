@@ -8,13 +8,33 @@
   ><strong>User Email :</strong>
   {{ user.email }}</mat-card-subtitle
 >
-<mat-card-subtitle
+<mat-card-subtitle>
+
+</mat-card-subtitle>
+
+<!-- <mat-card-subtitle
   ><strong>User id :</strong>
   {{ user._id }}</mat-card-subtitle
->
+> -->
 </div>
 
       <button *ngIf="!user" mat-icon-button color="primary" style="margin: 5px" (click)="getUser(order)">
         <mat-icon>assignment_ind</mat-icon>
         <!-- <mat-icon>account_box</mat-icon> -->
         </button>
+
+
+        <mat-card-subtitle
+        >
+        <div *ngIf="!order.isDelivered">
+          <strong>Order not deliverd </strong>
+          <button mat-flat-button color="primary" (click)="deliverd(order)"> deliverd</button>
+        </div>
+        <div *ngIf="order.isDelivered">
+          <strong>Order deliverd</strong>
+          <button mat-flat-button color="warn" (click)="notDeliverd(order)">not deliverd</button>
+          <div>Order deliverd At : {{ order.deliveredAt|date}}</div>
+        </div>
+
+
+        </mat-card-subtitle>

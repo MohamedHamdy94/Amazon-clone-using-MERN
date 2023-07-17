@@ -1,0 +1,42 @@
+#contianer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  mat-card {
+    width: 100%;
+    margin: 20px;
+  }
+  .divLeft {
+    width: 60%;
+  }
+  .divRight {
+    width: 20%;
+    margin-right: 5em;
+  }
+}
+table {
+  margin-top: 20px;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+td{
+  img{
+    height: 80px;
+  }
+}
+
+button{
+  width: 90%;
+margin: 10px
+}
+.mat-chip-list-stacked{
+  margin-top: 20px;
+}

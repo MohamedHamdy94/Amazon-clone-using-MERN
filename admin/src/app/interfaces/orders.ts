@@ -10,7 +10,7 @@ export interface Orders {
     }[]
   ,
   shippingAddress: {
-    fullname:  String,
+    fullName:  String,
     address:  String,
     city:  String,
     postalCode:  String,

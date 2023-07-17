@@ -16,6 +16,7 @@ export class UsersService {
 
   userInfo(order:any){
     console.log(order)
-    return this.http.get<any>(`/api/users/${order.user}`)
+    return this.http.get<any>(`/api/users/${order}`)
   }
+
 }

@@ -1,0 +1,131 @@
+<app-navbar class="nav"></app-navbar>
+
+<div id="contianer">
+  <div class="divLeft">
+    <mat-card class="cardLeft">
+      <mat-card-title>Shipping</mat-card-title>
+      <div><strong>Name : </strong>{{ order.shippingAddress.fullName }}</div>
+      <div>
+        <strong>Adress : </strong>{{ order.shippingAddress.postalCode }} ,
+        {{ order.shippingAddress.address }}, {{ order.shippingAddress.city }},
+        {{ order.shippingAddress.country }},
+      </div>
+      <div>
+
+        <!-- <div>
+          <strong>User Email : </strong>{{user.email}}
+
+        </div> -->
+      </div>
+      <span *ngIf="order.isDelivered">
+        <strong> Delivered At : </strong>
+        {{ order.deliveredAt | date: "medium" }}
+      </span>
+
+
+      <mat-chip-list
+        *ngIf="!order.isDelivered"
+        class="mat-chip-list-stacked"
+        aria-label="Color selection"
+      >
+        <mat-chip selected color="warn"> Not Delivered </mat-chip>
+      </mat-chip-list>
+    </mat-card>
+
+    <mat-card class="cardLeft">
+      <mat-card-title>Payment</mat-card-title>
+      <div><strong>Method : </strong> {{ order.paymentMethod }}</div>
+      <div *ngIf="order.isPaid">
+        <strong>Paid At : </strong> {{ order.paidAt }}
+      </div>
+
+      <mat-chip-list
+        *ngIf="!order.isPaid"
+        class="mat-chip-list-stacked"
+        aria-label="Color selection"
+      >
+        <mat-chip selected color="warn"> Not Paid </mat-chip>
+      </mat-chip-list>
+    </mat-card>
+
+    <mat-card class="cardLeft">
+      <mat-card-title>Order Items</mat-card-title>
+      <table>
+        <tr>
+          <th>image</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+
+        </tr>
+
+          <tr *ngFor="let categorie of order.orderItems">
+            <td><img src="{{ categorie.image }}" alt="{{ categorie.image }}"></td>
+            <td>{{ categorie.name }}</td>
+            <td>{{ categorie.quantity }}</td>
+            <td>{{ categorie.price | currency }}</td>
+
+          </tr>
+      </table>
+    </mat-card>
+  </div>
+
+  <div class="divRight">
+    <mat-card>
+      <mat-card-title>Order Summary</mat-card-title>
+
+      <table>
+        <tr>
+          <td>
+            <mat-card-subtitle><strong>Items</strong> </mat-card-subtitle>
+          </td>
+          <td>
+            <mat-card-subtitle
+              ><strong>{{ order.itemsPrice | currency }}</strong>
+            </mat-card-subtitle>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <mat-card-subtitle><strong>Shipping</strong> </mat-card-subtitle>
+          </td>
+          <td>
+            <mat-card-subtitle
+              ><strong>{{ order.shippingPrice | currency }}</strong>
+            </mat-card-subtitle>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <mat-card-subtitle><strong>Tax</strong> </mat-card-subtitle>
+          </td>
+          <td>
+            <mat-card-subtitle
+              ><strong>{{ order.taxPrice | currency }}</strong>
+            </mat-card-subtitle>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Order Total</strong>
+          </td>
+          <td>
+            <strong>{{ order.totalPrice | currency }}</strong>
+          </td>
+        </tr>
+      </table>
+
+      <button (click)="delivered(order)" *ngIf="!order.isDelivered" mat-flat-button color="primary">
+        Delivered
+      </button>
+
+      <button (click)="notDelivered(order)" *ngIf="order.isDelivered" mat-flat-button color="warn">
+        Not Delivered
+      </button>
+      <!-- <button mat-flat-button color="warn" (click)="deleteOrder(order)">Delelet</button> -->
+    </mat-card>
+  </div>
+</div>

@@ -7,9 +7,11 @@ import { LoaderService } from './services/loader.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'admin';
   constructor() {
-    
+
+
   }
 }

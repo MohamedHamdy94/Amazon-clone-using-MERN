@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { OrdersService } from '../services/orders.service';
 import { Products } from '../interfaces/products';
+import { DailogService } from '../shared/dailog.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -17,7 +18,7 @@ import { Products } from '../interfaces/products';
 })
 export class ProductsComponent implements OnInit {
   allInfo: any;
-  products: string[]  = [
+  products: string[] = [
     'image',
     'name',
     'slug',
@@ -29,7 +30,7 @@ export class ProductsComponent implements OnInit {
     'rating',
     'numReviews',
     'action',
-  ]  ;
+  ];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,30 +41,30 @@ export class ProductsComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private auth: AuthService,
-    private apiOrder: OrdersService
+    private apiOrder: OrdersService,
+    private dailogService: DailogService
   ) {}
 
   ngOnInit(): void {
     // console.log(this.auth.IsLogin().token);
 
     this.getAllProducts();
-    this.getAllinfo()
+    this.getAllinfo();
   }
 
-getAllinfo() {
-  this.apiOrder.getInfo().subscribe({
-    next: (res) => {
-      console.log(res);
-      this.allInfo = res;
-      console.log(this.allInfo);
-    },
-  });
-}
-
+  getAllinfo() {
+    this.apiOrder.getInfo().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.allInfo = res;
+        console.log(this.allInfo);
+      },
+    });
+  }
 
   getAllProducts() {
     this.api.getProduct().subscribe({
-      next: (res:Products[]) => {
+      next: (res: Products[]) => {
         console.log(res);
         this.dataSource = new MatTableDataSource(res);
 
@@ -72,11 +73,10 @@ getAllinfo() {
         this.dataSource.sort = this.sort;
       },
       error: (err) => {
-        console.log(err.message);
+        console.log(err);
         alert('error whil get all product');
       },
     });
-
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -97,20 +97,32 @@ getAllinfo() {
       .subscribe((val) => {
         if (val === 'update') {
           // this.getAllProducts();
-          window.location.reload() ;
-
+          window.location.reload();
         }
       });
   }
 
   delete(row: any) {
-    this.api.deleteProduct(row).subscribe(
+    //   this.api.deleteProduct(row).subscribe(
 
-      (error) => {
-        alert('Error Product not deleted');
-      }
-    );
+    //     (error) => {
+    //       alert('Error Product not deleted');
+    //     }
+    //   );
 
-    window.location.reload() ;
+    //   window.location.reload() ;
+
+    this.dailogService
+      .openConfirmDialog('Are you sure to delete this product ?')
+      .afterClosed()
+      .subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.api.deleteProduct(row).subscribe((error) => {
+            alert('Error Product not deleted');
+          });
+          window.location.reload();
+        }
+      });
   }
 }

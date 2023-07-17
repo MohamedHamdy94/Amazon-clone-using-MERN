@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
     orders: [{ numOrders: 0, totalSales: 0 }],
     productCategories: [{ _id: '', count: 0 }],
     users:[{_id: '',numUsers:0}],
+    products:[{ _id: '', numProducts: 0 }],
+
   };
 
 
@@ -31,6 +33,7 @@ export class NavbarComponent implements OnInit {
     //   orders:object[],
     // }
   }
+
   getAllProducts() {
     this.api.getProduct();
   }
@@ -46,32 +49,36 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllinfo();
+    // this.getAllinfo();
     // console.log(this.getAllinfo());
   }
-  getAllinfo() {
-    this.OrderApi.getInfo().subscribe({
-      next: (res) => {
-        console.log(res);
-        console.log(res.productCategories);
-        console.log(res.users[0]);
-        console.log(res.orders);
+//   getAllinfo() {
+//     this.OrderApi.getInfo().subscribe({
+//       next: (res) => {
+//         console.log(res);
+//         console.log(res.productCategories);
+//         console.log(res.users[0]);
+//         console.log(res.orders);
 
-        // orders: Array(1)
-        // 0: {_id: null, numOrders: 5, totalSales: 97369}
-        // length: 1
-        // [[Prototype]]: Array(0)
-        // productCategories: Array(1)
-        // 0: {_id: 'laptop', count: 4}
-        // length: 1
-        // [[Prototype]]: Array(0)
-        // users: Array(1)
-        // 0: {_id: null, numUsers: 4}
-        this.allInfo = res;
-        console.log(this.allInfo);
-      },
-    });
-  }
+//         // orders: Array(1)
+//         // 0: {_id: null, numOrders: 5, totalSales: 97369}
+//         // length: 1
+//         // [[Prototype]]: Array(0)
+//         // productCategories: Array(1)
+//         // 0: {_id: 'laptop', count: 4}
+//         // length: 1
+//         // [[Prototype]]: Array(0)
+//         // users: Array(1)
+//         // 0: {_id: null, numUsers: 4}
+//         this.allInfo = res;
+//         console.log(this.allInfo);
+//       },
+//       error: (err) => {
+//         console.log(err);
+//         alert('error whil get all product');
+//       },
+//     });
+//   }
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['login']);

@@ -1,0 +1,109 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="isHandset$ | async"
+  >
+    <mat-toolbar>Summary</mat-toolbar>
+    <mat-nav-list>
+
+          <div class="summary">
+            <mat-card-title>Users</mat-card-title><br>
+            <mat-card-subtitle>
+              <strong> Users Number : </strong>
+              <span *ngIf="allInfo.users[0]"
+                >{{ allInfo.users[0].numUsers }}
+              </span>
+              <span *ngIf="!allInfo.users[0]">No users found</span>
+            </mat-card-subtitle>
+          </div>
+
+          <div class="summary">
+            <mat-card-title>Orders</mat-card-title><br>
+            <mat-card-subtitle
+              ><strong> Orders Number : </strong>
+              <span *ngIf="allInfo.orders[0]">{{
+                allInfo.orders[0].numOrders
+              }}</span>
+              <span *ngIf="!allInfo.orders[0]">No Orders found</span>
+              <!-- {{ allInfo.orders[0].numOrders }} -->
+            </mat-card-subtitle><br>
+
+            <mat-card-subtitle>
+              <strong> Orders Sales : </strong>
+              <span *ngIf="allInfo.orders[0]"
+                >{{ allInfo.orders[0].totalSales.toFixed(2) | currency }}
+              </span>
+              <span *ngIf="!allInfo.orders[0]">No Sales found</span>
+              <!-- {{ allInfo.orders[0].totalSales.toFixed(2) | currency }} -->
+            </mat-card-subtitle>
+          </div>
+
+
+          <div class="summary">
+            <mat-card-title>Categories : {{allInfo.products[0].numProducts}}</mat-card-title>
+            <mat-card-subtitle *ngIf="allInfo.productCategories[0]">
+              <table>
+                <tr>
+                  <th>Categorie</th>
+                  <th>count</th>
+                </tr>
+
+                  <tr *ngFor="let categorie of allInfo.productCategories">
+                    <td>{{ categorie._id }}</td>
+                    <td>{{ categorie.count }}</td>
+                  </tr>
+              </table>
+              
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="!allInfo.productCategories[0]">
+<h4>No Categories Found</h4>
+              
+            </mat-card-subtitle>
+
+          </div>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="customPrimary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="true"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Summary</span>
+      <span class="example-spacer"></span>
+
+      <button class="navLink" mat-raised-button (click)="logout()">
+        logout
+      </button>
+
+      <a class="navLink" routerLink="/orders">
+        <button mat-raised-button>Show Orders</button>
+      </a>
+      <a class="navLink" routerLink="/products">
+        <button mat-raised-button>Show products</button>
+      </a>
+      <a class="navLink" routerLink="/users">
+        <button mat-raised-button>Show Users</button>
+      </a>
+      <button
+        class="navLink"
+        (click)="openDialog()"
+        mat-raised-button
+        color="primary"
+      >
+        Add Product
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

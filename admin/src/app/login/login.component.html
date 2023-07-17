@@ -1,13 +1,21 @@
+
+<div class='info'>
+  <h4>email: mohamedhamdy@gmail.com</h4>
+  <h4>password: 01125594521</h4>
+</div>
+
 <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
+
   <mat-card class="box" >
+
     <mat-card-header>
       <mat-card-title>Sign In</mat-card-title>
+
     </mat-card-header>
 
     <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-card-content>
-
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Email</mat-label>
         <input formControlName="email" type="email" matInput
@@ -21,6 +29,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="fill">
+
         <mat-label>Password</mat-label>
         <input formControlName="password" type="password" matInput >
         <mat-error *ngIf="formControls['password'].touched && !formControls['password'].valid">
