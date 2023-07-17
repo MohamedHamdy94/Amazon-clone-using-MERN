@@ -27,13 +27,8 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-const __dirname = path.resolve();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
-// app.get('*',(req, res) =>
-//   res.sendFile(path.join(__dirname, '/admin/dist/admin/index.html'))
-// );
+  app.use(express.json());
+
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
@@ -44,6 +39,12 @@ app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/admin', adminRouter);
 
+const __dirname = path.resolve();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
+app.get('*',(req, res) =>
+  res.sendFile(path.join(__dirname, '/admin/dist/admin/index.html'))
+);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
