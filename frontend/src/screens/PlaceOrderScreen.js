@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
-import Card from "react-bootstrap/esm/Card";
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import { Helmet } from "react-helmet-async";
@@ -87,7 +87,7 @@ export default function PlaceOrderScreen() {
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Shipping</Card.Title>
-         <p>     <Card.Text>
+             <Card.Text>
                 <strong>Name:</strong>
                 {"  "}
                 {cart.shippingAddress.fullName}
@@ -96,7 +96,7 @@ export default function PlaceOrderScreen() {
                 {"  "}
                 {cart.shippingAddress.address},{cart.shippingAddress.city},
                 {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
-              </Card.Text></p>
+              </Card.Text>
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
