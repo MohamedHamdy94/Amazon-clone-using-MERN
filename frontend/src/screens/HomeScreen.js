@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 // import { Link } from "react-router-dom";
 // import data from '../data';
 import axios from "axios";
@@ -62,11 +62,7 @@ function HomeScreen() {
 
     // results();
   }, []);
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+ 
   return (
     <div>
       <ControlledCarousel />

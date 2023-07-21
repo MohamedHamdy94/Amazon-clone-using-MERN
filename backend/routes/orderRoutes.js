@@ -47,7 +47,7 @@ orderRouter.delete(
   })
 );
 orderRouter.get(
-  "/summary",
+  "/adminsummary",
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.aggregate([
       {

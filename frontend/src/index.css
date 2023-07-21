@@ -1,3 +1,8 @@
+:root {
+  --color-bg: #120f1d;
+--color-bg-variant: #201447;
+--color-primary: #4db5ff;
+--color-primary-variant: rgba(77, 181, 255, 0.4);}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -97,4 +102,54 @@ main {
 
 .active-nav {
   left: 0;
+}
+
+
+footer {
+  background: var(--color-bg-variant);
+  padding: 3rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 7rem;
+}
+footer a {
+  color: var(--color-primary);
+}
+.footer__logo {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+.permalinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto 3rem;
+}
+.footer__socials {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.footer__socials a {
+  background: var(--color-bg);
+  color: var(--color-white);
+  padding: 0.8rem;
+  border-radius: 0.7rem;
+  display: flex;
+  border: 1px solid transparent;
+  font-size: larger;
+  font-weight: bolder;
+}
+.footer__socials a:hover {
+  background: transparent;
+  color: var(--color-white);
+  border-color: var(--color-bg);
+}
+.footer__copyright {
+  margin-bottom: 4rem;
+  color: var(--color-bg);
 }

@@ -21,16 +21,8 @@ import OrderScreen from "./screens/OrderScreen";
 import Footer from "./components/Footer";
 import { getError } from "./utils";
 import axios from "axios";
-import SearchBox from "./components/SearchBox";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Toggle } from "./components/compon/Toggle";
-import { useDarkMode } from "./components/styles/useDarkMode";
-import { ThemeProvider } from "styled-components";
-import {
-  lightTheme,
-  darkTheme,
-  GlobalStyles,
-} from "./components/styles/GlobalStyles";
+
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -43,7 +35,6 @@ function App() {
     localStorage.removeItem("paymentMethod");
     window.location.href = "/signin";
   };
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
@@ -58,20 +49,10 @@ function App() {
     fetchCategories();
   }, []);
   console.log(categories);
-  const [theme, toggleTheme] = useDarkMode();
-  const themeMode = theme === "light" ? lightTheme : darkTheme;
+
   return (
     <BrowserRouter>
-      <ThemeProvider theme={themeMode}>
-        <div
-          className={
-            sidebarIsOpen
-              ? "d-flex flex-column site-container active-cont"
-              : "d-flex flex-column site-container"
-          }
-        >
-          
-          <GlobalStyles />
+    
           <ToastContainer position="bottom-center" limit={1} />
           <header>
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -81,7 +62,6 @@ function App() {
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                  <Toggle theme={theme} toggleTheme={toggleTheme} />
                   <Nav className="me-auto w-100 justify-content-end">
                     <Link to="/cart" className="nav-link">
                       cart
@@ -140,8 +120,6 @@ function App() {
           </main>
           {/* <footer className="text-center">all reight reserved</footer> */}
           <Footer className="mt-5" />
-        </div>
-      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -1,114 +1,33 @@
 import React from "react";
 import {
   MDBFooter,
-  MDBContainer,
-  MDBIcon,
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-
+import { FaFacebookF } from 'react-icons/fa';
+import { BsLinkedin } from 'react-icons/bs';
+import { FaGithub } from 'react-icons/fa';
 export default function Footer() {
   return (
     <MDBFooter className="text-center" color="white" bgColor="dark">
-      <MDBContainer className="p-4">
-        <section className="mb-4">
-          <Link
-            className="btn btn-outline-light btn-floating m-3"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="facebook-f" />
-          </Link>
-
-          <Link
-            className="btn btn-outline-light btn-floating m-3"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="twitter" />
-          </Link>
-
-          <Link
-            className="btn btn-outline-light btn-floating m-3"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="google" />
-          </Link>
-
-          <Link
-            className="btn btn-outline-light btn-floating m-3"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="instagram" />
-          </Link>
-
-          <Link
-            className="btn btn-outline-light btn-floating m-3"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="linkedin-in" />
-          </Link>
-
-          <Link
-            className="btn btn-outline-light btn-floating m-1"
-            to="#!"
-            role="button"
-          >
-            <MDBIcon fab icon="github" />
-          </Link>
-        </section>
-
-        <section className="">
-          <form action="">
-
-          </form>
-        </section>
-        <MDBRow>
-          <div>
-            <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-            <div className="d-flex justify-content-around">
-              <p>
-                <i className="fas fa-home "></i> New York, NY 10012, US
-              </p>
-              <p>
-                <i className="fas fa-envelope  "> </i>
-                {"  "}
-                info@example.com
-              </p>
-              <p>
-                <i className="fas fa-phone "></i> + 01 234 567 88
-              </p>
-              <p>
-                <i className="fas fa-print"></i> + 01 234 567 89
-              </p>
-            </div>
-          </div>
-        </MDBRow>
-        <section className="mb-4">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            distinctio earum repellat quaerat voluptatibus placeat nam, commodi
-            optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-            sequi voluptate quas.
-          </p>
-        </section>
-
-        <section className=""></section>
-      </MDBContainer>
+  <div className="footer__socials">
+        <a href="https://www.facebook.com/anakingmsr/">
+          <FaFacebookF />
+        </a>
+        <a href="https://github.com/MohamedHamdy94">
+          <FaGithub />
+        </a>
+        <a href="https://www.linkedin.com/in/mohamed-mohamed-138693219/">
+          <BsLinkedin />
+        </a>
+      </div>
 
       <div
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        © 2020 Copyright:
-        <Link className="text-white" to="https://mdbootstrap.com/">
-          MDBootstrap.com
+        © 2022 Copyright:{' '}
+        <Link className="text-white" to="https://mohamedhamdy94.github.io/Mohamed-Hamdy/">
+        mohamedhamdy94.github.io/Mohamed-Hamdy
         </Link>
       </div>
     </MDBFooter>
