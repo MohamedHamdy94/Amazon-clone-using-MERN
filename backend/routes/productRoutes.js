@@ -86,14 +86,14 @@ productRouter.post(
     if(!req.file) {
       return res.status(500).send({ message: 'Upload fail'});
   } else {
-      req.body.image = 'http://localhost:5000/images/' + req.file.filename;
+      req.body.image = 'http://localhost:5000/public/images/' + req.file.filename;
       Product.create(req.body, function (err, gallery) {
           if (err) {
               console.log(err);
               return next(err);
           }
           res.status(201).send({
-            message: 'product created successfully ',})      });
+            message: 'product created successfully '})      });
   }
   })
 );
