@@ -4,6 +4,8 @@ import expressAsyncHandler from "express-async-handler";
 import { isAuth, isAdmin, isAdminAuth } from "../utils.js";
 import multer from "multer";
 
+const path = require("path");
+
 // Save file to server storage
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
