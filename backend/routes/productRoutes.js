@@ -7,7 +7,7 @@ import multer from "multer";
 // Save file to server storage
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './public/images');
+    cb(null, path.join(__dirname, "../public/images/");
   },
   filename: (req, file, cb) => {
     console.log(file);
