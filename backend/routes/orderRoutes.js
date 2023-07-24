@@ -1,7 +1,7 @@
 // <<<<<<< HEAD
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import { isAdminAuth, isAuth, isAdmin } from "../utils.js";
+import { isAdminAuth, isAuth, isAdmin } from "../middleware/utils.js";
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
 import Product from "../models/productModel.js";

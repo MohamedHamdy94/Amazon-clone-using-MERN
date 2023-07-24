@@ -1,34 +1,8 @@
 import express from "express";
 import Product from "../models/productModel.js";
 import expressAsyncHandler from "express-async-handler";
-import { isAuth, isAdmin, isAdminAuth } from "../utils.js";
-import multer from "multer";
-
-const path = require("path");
-
-// Save file to server storage
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../public/images/");
-  },
-  filename: (req, file, cb) => {
-    console.log(file);
-    var filetype = '';
-    if(file.mimetype === 'image/gif') {
-      filetype = 'gif';
-    }
-    if(file.mimetype === 'image/png') {
-      filetype = 'png';
-    }
-    if(file.mimetype === 'image/jpeg') {
-      filetype = 'jpg';
-    }
-    cb(null, 'image-' + Date.now() + '.' + filetype);
-  }
-});
-
-var upload = multer({storage: storage});
-
+import { isAuth, isAdmin, isAdminAuth } from "../middleware/utils.js";
+import upload from "../middleware/multer.js";
 
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
@@ -88,7 +62,9 @@ productRouter.post(
     if(!req.file) {
       return res.status(500).send({ message: 'Upload fail'});
   } else {
-      req.body.image = 'http://localhost:5000/public/images/' + req.file.filename;
+      req.body.image = '/public/images/' + req.file.filename;
+      console.log(path.dirname())
+
       Product.create(req.body, function (err, gallery) {
           if (err) {
               console.log(err);
@@ -106,8 +82,9 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
+      console.log(process.cwd()     )
 
-      req.body.image = 'http://localhost:5000/images/' + req.file.filename;
+      req.body.image = '/public/images/' + req.file.filename;
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         slug: req.body.slug,

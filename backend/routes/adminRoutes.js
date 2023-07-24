@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import Admin from '../models/adminModel.js';
-import { generateAdminToken } from '../utils.js';
+import { generateAdminToken } from "../middleware/utils.js";
 
 const adminRouter = express.Router();
 

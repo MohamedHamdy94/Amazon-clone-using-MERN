@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../models/userModel.js";
-import { generateToken, isAdminAuth, isAuth } from "../utils.js";
+import { generateToken, isAdminAuth, isAuth } from "../middleware/utils.js";
 import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 const userRouter = express.Router();
