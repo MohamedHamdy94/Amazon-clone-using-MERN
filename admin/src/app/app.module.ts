@@ -40,6 +40,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatConfirmDialogComponent,
     OrderDetailsComponent,
     MainNavComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,

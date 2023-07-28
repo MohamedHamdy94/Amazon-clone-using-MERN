@@ -6,6 +6,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './shared/auth.guard';
 import { UsersComponent } from './users/users.component';
+import { ImageComponent } from './image/image.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch:"full"},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'products', component:ProductsComponent ,canActivate:[AuthGuard] },
   {path:'orders', component:OrdersComponent,canActivate:[AuthGuard]  },
   {path:'order/:id', component:OrderDetailsComponent,canActivate:[AuthGuard]  },
+  {path:'images/:id', component:ImageComponent },
 
   {path:'users', component:UsersComponent,canActivate:[AuthGuard] },
   {path:'**', redirectTo:'login',pathMatch:"full"},

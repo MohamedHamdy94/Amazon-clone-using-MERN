@@ -45,7 +45,7 @@ const __dirname = path.resolve();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/admin/dist/admin')));
 //app.use(express.static(path.join(__dirname, "/frontend/build")));
-
+//../frontend && npm install && npm run build
 app.get('*',(req, res) =>
   res.sendFile(path.join(__dirname, '/admin/dist/admin/index.html'))
  // res.sendFile(path.join(__dirname, "/frontend/build/index.html"))

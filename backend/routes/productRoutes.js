@@ -3,7 +3,7 @@ import Product from "../models/productModel.js";
 import expressAsyncHandler from "express-async-handler";
 import { isAuth, isAdmin, isAdminAuth } from "../middleware/utils.js";
 import upload from "../middleware/multer.js";
-
+import resizeProductImages from '../middleware/uploade.js'
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
   const products = await Product.find();
@@ -55,14 +55,14 @@ productRouter.delete(
 
 productRouter.post(
   '/add', upload.single('file'),
-  isAdminAuth,
+  isAdminAuth,resizeProductImages,
   expressAsyncHandler(async (req, res) => {
     // const products = await Product.insertMany(req.body);
     // res.send({ products });
     if(!req.file) {
       return res.status(500).send({ message: 'Upload fail'});
   } else {
-      req.body.image = '/public/images/' + req.file.filename;
+      req.body.image = './images/' + req.file.filename;
       console.log(path.dirname())
 
       Product.create(req.body, function (err, gallery) {
@@ -84,7 +84,7 @@ productRouter.put(
     if (product) {
       console.log(process.cwd()     )
 
-      req.body.image = '/public/images/' + req.file.filename;
+      req.body.image = './images/' + req.file.filename;
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         slug: req.body.slug,
