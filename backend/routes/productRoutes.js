@@ -53,6 +53,8 @@ productRouter.delete(
   })
 );
 
+
+
 productRouter.post(
   '/add', upload.single('file'),
   isAdminAuth,resizeProductImages,
@@ -62,8 +64,8 @@ productRouter.post(
     if(!req.file) {
       return res.status(500).send({ message: 'Upload fail'});
   } else {
-      req.body.image = './images/' + req.file.filename;
-      console.log(path.dirname())
+    req.body.image = `${window.location.origin}/images/` + req.file.filename;
+    console.log(path.dirname())
 
       Product.create(req.body, function (err, gallery) {
           if (err) {
@@ -82,9 +84,9 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      console.log(process.cwd()     )
+      req.body.image = `${window.location.origin}/images/` + req.file.filename;
+    //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
 
-      req.body.image = './images/' + req.file.filename;
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         slug: req.body.slug,

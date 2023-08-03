@@ -15,3 +15,4 @@ export class ImageComponent implements OnInit {
     this.image = this.route.snapshot.paramMap.get('id');
   }
 }
+
