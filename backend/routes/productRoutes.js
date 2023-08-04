@@ -54,10 +54,9 @@ productRouter.delete(
 );
 
 
-
 productRouter.post(
   '/add', upload.single('file'),
-  isAdminAuth,resizeProductImages,
+  isAdminAuth,
   expressAsyncHandler(async (req, res) => {
     // const products = await Product.insertMany(req.body);
     // res.send({ products });
@@ -67,8 +66,6 @@ productRouter.post(
     //req.body.image = `http://localhost:5000/images/` + req.file.filename;
     req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
     console.log( req.body.image );
-
-    console.log(path.dirname())
 
       Product.create(req.body, function (err, gallery) {
           if (err) {
@@ -85,6 +82,7 @@ productRouter.put(
   `/:id`,upload.single('file'),
   isAdminAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log(req)
     const product = await Product.findById(req.params.id);
     if (product) {
       req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;

@@ -4,37 +4,21 @@ import expressAsyncHandler from "express-async-handler";
 const resizeProductImages = expressAsyncHandler(async (req, res, next) => {
   // console.log(req.files);
   //1- Image processing for imageCover
-  if (req.files.imageCover) {
-    const imageCoverFileName = `product-${uuidv4()}-${Date.now()}-cover.jpeg`;
+  if (req.file) {
+    const imageFileName =  `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
 
-    await sharp(req.files.imageCover[0].buffer)
+    await sharp(req.file.image.buffer)
       .resize(2000, 1333)
       .toFormat('jpeg')
       .jpeg({ quality: 95 })
-      .toFile(`./images/${imageCoverFileName}`);
+      .toFile(`./assets/images/${imageFileName}`);
 
     // Save image into our db
-    req.body.imageCover = imageCoverFileName;
+    req.body.image = imageFileName;
   }
-  //2- Image processing for images
-  if (req.files.images) {
-    req.body.images = [];
-    await Promise.all(
-      req.files.images.map(async (img, index) => {
-        const imageName = `product-${uuidv4()}-${Date.now()}-${index + 1}.jpeg`;
 
-        await sharp(img.buffer)
-          .resize(2000, 1333)
-          .toFormat('jpeg')
-          .jpeg({ quality: 95 })
-          .toFile(`./assets/images/${imageName}`);
-
-        // Save image into our db
-        req.body.images.push(imageName);
-      })
-    );
 
     next();
-  }
+  
 });
 export default resizeProductImages;
