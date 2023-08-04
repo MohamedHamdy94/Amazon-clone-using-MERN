@@ -65,7 +65,7 @@ productRouter.post(
       return res.status(500).send({ message: 'Upload fail'});
   } else {
     //req.body.image = `http://localhost:5000/images/` + req.file.filename;
-   req.body.image = `https://admin-8gy5.onrender.com/images/` + req.file.filename;
+    req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
     console.log( req.body.image );
 
     console.log(path.dirname())
