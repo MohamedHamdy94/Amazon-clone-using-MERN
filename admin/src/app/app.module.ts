@@ -88,7 +88,6 @@ import { ImageComponent } from './image/image.component';
   useClass:RequestInterceptor ,
   multi:true
   }
-
 ],
   bootstrap: [AppComponent]
 })

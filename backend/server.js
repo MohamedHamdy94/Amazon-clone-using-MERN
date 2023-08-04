@@ -13,7 +13,7 @@ import path from 'path';
 dotenv.config();
 const app = express();
 app.use(cors());
-// app.use(express.static('public'));
+ app.use(express.static('assets'));
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -29,9 +29,6 @@ mongoose
   });
   app.use(express.json());
 
-app.get('/api/keys/paypal', (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
-});
 app.use('/api/seed', seedRouter);
 // app.get("/api/products", function (req, res) {
 //   res.send(data.products);
@@ -43,7 +40,7 @@ app.use('/api/admin', adminRouter);
 
 const __dirname = path.resolve();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/admin/dist/admin/assets')));
+app.use(express.static(path.join(__dirname, '/admin/dist/admin/')));
 //app.use(express.static(path.join(__dirname, "/frontend/build")));
 //../frontend && npm install && npm run build
 app.get('*',(req, res) =>
