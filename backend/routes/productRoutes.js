@@ -87,7 +87,7 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      req.body.image = `https://admin-8gy5.onrender.com/images/` + req.file.filename;
+      req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
     //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
     //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
     console.log( req.body.image );
