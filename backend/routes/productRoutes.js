@@ -64,7 +64,9 @@ productRouter.post(
     if(!req.file) {
       return res.status(500).send({ message: 'Upload fail'});
   } else {
-    req.body.image = `${window.location.origin}/images/` + req.file.filename;
+    req.body.image = `https://admin-8gy5.onrender.com/images/` + req.file.filename;
+    console.log( req.body.image );
+
     console.log(path.dirname())
 
       Product.create(req.body, function (err, gallery) {
@@ -84,8 +86,10 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      req.body.image = `${window.location.origin}/images/` + req.file.filename;
+      req.body.image = `https://admin-8gy5.onrender.com/images/` + req.file.filename;
+    //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
     //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
+    console.log( req.body.image );
 
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
