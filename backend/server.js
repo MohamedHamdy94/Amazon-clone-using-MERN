@@ -40,7 +40,7 @@ app.use('/api/admin', adminRouter);
 
 const __dirname = path.resolve();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'admin/dist/admin/assets/images')));
+app.use(express.static(path.join(__dirname, 'admin/dist/admin')));
 //app.use(express.static(path.join(__dirname, "/frontend/build")));
 //../frontend && npm install && npm run build
 app.get('*',(req, res) =>
