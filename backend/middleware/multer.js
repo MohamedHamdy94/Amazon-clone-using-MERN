@@ -1,9 +1,17 @@
 import multer from "multer";
 // File upload folder
+import path from 'path';
+
+const __dirname = path.resolve();
+
 const DIR = './assets/images';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log(__dirname)
+
+    console.log(DIR)
+
     cb(null, DIR);
   },
   filename: (req, file, cb) => {
