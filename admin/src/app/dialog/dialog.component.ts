@@ -36,7 +36,7 @@ export class DialogComponent implements OnInit {
   protectForm!: FormGroup;
   imageData: any;
   matcher = new MyErrorStateMatcher();
-
+  imgFil: any;
   constructor(
     private dailogService: DailogService,
 
@@ -53,7 +53,7 @@ export class DialogComponent implements OnInit {
       image: [
         null,
         [
-          Validators.required,
+          // Validators.required,
           //  Validators.pattern(/^\w+(\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF))$/)
           // Validators.pattern(/^[a-zA-Z0-9_]+(\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF))$/)
         ],
@@ -65,14 +65,15 @@ export class DialogComponent implements OnInit {
       //  numReviews: ['', Validators.required] ,
       description: ['', Validators.required],
     });
-    console.log(this.editData);
 
     if (this.editData) {
+      console.log(this.editData);
+
       this.actionButn = 'Update';
       this.protectForm.controls['name'].setValue(this.editData.name);
       this.protectForm.controls['slug'].setValue(this.editData.slug);
       this.protectForm.controls['category'].setValue(this.editData.category);
-      this.protectForm.controls['image'].setValue(this.editData.image);
+      this.imgFil=this.editData.image;
       this.protectForm.controls['price'].setValue(this.editData.price);
       this.protectForm.controls['countInStock'].setValue(
         this.editData.countInStock
@@ -92,19 +93,26 @@ export class DialogComponent implements OnInit {
     this.imageData = null;
     const file: any = event.target.files[0];
     this.protectForm.patchValue({ image: file });
-    const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg','image/gif', 'image/JPG', 'image/JPEG', 'image/PNG', 'image/GIF'];
+    const allowedMimeTypes = [
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/gif',
+      'image/JPG',
+      'image/JPEG',
+      'image/PNG',
+      'image/GIF',
+    ];
     if (file && allowedMimeTypes.includes(file.type)) {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageData = reader.result as string;
       };
       reader.readAsDataURL(file);
-    }else{
+    } else {
       this.protectForm.controls['image'].reset();
 
-      this.dailogService
-      .openConfirmDialog("Please choose an image")
-
+      this.dailogService.openConfirmDialog('Please choose an image');
     }
     console.log(file);
   }
@@ -114,51 +122,70 @@ export class DialogComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.protectForm.value);
     if (!this.editData) {
-      if (this.protectForm.valid) {
+      console.log('!this.editData');
 
-        const imgFil: File = this.protectForm.get('image')?.value._files[0];
-        console.log(File);
+      if (this.protectForm.valid) {
+        const imgFil: any = this.protectForm.get('image')?.value._files[0];
         this.api.postProduct(this.protectForm.value, imgFil).subscribe(
           (res) => {
             this.protectForm.reset();
             this.dialogRef.close('save');
             window.location.reload();
             this.imageData = null;
-
           },
           (error) => {
             console.log(error);
             alert('Error Product not add');
           }
         );
-      } else {
-        this.dailogService
-        .openConfirmDialog("form not valid")
       }
-    } else {
+    } else if (!this.protectForm.get('image')?.value  ) {
       this.updateProduct();
+    } else if (this.protectForm.get('image')?.value) {
+      this.updateProductImage();
+
+    } else {
+
+      this.dailogService.openConfirmDialog('form not valid');
     }
   }
 
+  updateProductImage() {
+    console.log('up image');
+    console.log(!this.protectForm.get('image')?.value);
 
-  updateProduct() {
+    console.log(this.protectForm.valid);
+
     console.log(this.protectForm.value);
     if (this.protectForm.valid) {
-      const imgFil: File = this.protectForm.get('image')?.value._files[0];
-      console.log(imgFil);
+      this.imgFil = this.protectForm.get('image')?.value._files[0];
 
       this.api
-        .putProduct(this.protectForm.value, this.editData, imgFil)
+        .putProduct(this.protectForm.value, this.editData, this.imgFil)
         .subscribe((res) => {
           this.protectForm.reset();
           this.dialogRef.close('update');
           window.location.reload();
         });
     } else {
-      this.dailogService
-      .openConfirmDialog("form not valid")
+      this.dailogService.openConfirmDialog('form not valid');
+    }
+  }
+
+  updateProduct() {
+    console.log('up NO image');
+    if (this.protectForm.valid) {
+      this.imgFil= this.editData.image
+      this.api
+        .putProduct(this.protectForm.value, this.editData, this.imgFil)
+        .subscribe((res) => {
+          this.protectForm.reset();
+          this.dialogRef.close('update');
+          window.location.reload();
+        });
+    } else {
+      this.dailogService.openConfirmDialog('form not valid');
     }
   }
 }

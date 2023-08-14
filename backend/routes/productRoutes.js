@@ -79,17 +79,19 @@ productRouter.post(
 );
 
 productRouter.put(
-  `/:id`,upload.single('file'),
+  `/image/:id`,upload.single('file'),
   isAdminAuth,
   expressAsyncHandler(async (req, res) => {
-    console.log(req)
+    console.log('image')
+
     const product = await Product.findById(req.params.id);
     if (product) {
-      req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
+ req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
+      
     //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
     //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
-    console.log( req.body.image );
-
+    console.log(req.body );
+      
       await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         slug: req.body.slug,
@@ -109,5 +111,35 @@ productRouter.put(
     }
   })
 );
-
+productRouter.put(
+  `/:id`,
+  isAdminAuth,
+  expressAsyncHandler(async (req, res) => {
+    console.log('no')
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      
+    //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
+    //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
+    console.log(req );
+      
+      await Product.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        slug: req.body.slug,
+        category: req.body.category,
+        image: req.body.file,
+        price: req.body.price,
+        countInStock: req.body.countInStock,
+        brand: req.body.brand,
+        // rating: req.body.rating,
+        // numReviews: req.body.numReviews,
+        description: req.body.description,
+      });
+      res.status(201).send({
+        message: 'product Updated successfully ',})
+    } else {
+      res.status(404).send({ message: 'product not found' });
+    }
+  })
+);
 export default productRouter;
