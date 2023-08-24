@@ -92,10 +92,10 @@ function ProductScreen() {
   ) : (
     <div>
       <Row>
-        <Col md={6}>
+        <Col md={3}>
           <img className="img-large" src={product.image} alt={product.name} />
         </Col>
-        <Col md={3}>
+        <Col md={6}>
           <ListGroup variant>
             <ListGroup.Item>
               <Helmet>
@@ -104,10 +104,8 @@ function ProductScreen() {
               <h1>{product.name}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
+            <Rating rating={product.rating} numReviews={product.numReviews} />
+
             </ListGroup.Item>
             <ListGroup.Item>Price: $ {product.price}</ListGroup.Item>
             <ListGroup.Item>Description : {product.description}</ListGroup.Item>

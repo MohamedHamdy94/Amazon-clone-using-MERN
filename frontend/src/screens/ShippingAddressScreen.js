@@ -42,7 +42,9 @@ export default function ShippingAddressScreen() {
         country,
       })
     );
-    navigate("/payment");
+    navigate("/placeorder");
+
+   // navigate("/payment");
   };
   useEffect(() => {
     if (!userInfo) {

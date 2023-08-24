@@ -32,7 +32,7 @@ mongoose
 app.use('/api/seed', seedRouter);
 // app.get("/api/products", function (req, res) {
 //   res.send(data.products);
-// });
+// }); 
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
