@@ -110,4 +110,34 @@ productRouter.put(
   })
 );
 
+productRouter.put(
+  `/image/:id`,
+  isAdminAuth,
+  expressAsyncHandler(async (req, res) => {
+    console.log(req)
+    const product = await Product.findById(req.params.id);
+    if (product) {
+    //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
+    //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
+    console.log( req.body.image );
+
+      await Product.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        slug: req.body.slug,
+        category: req.body.category,
+        image: req.body.image,
+        price: req.body.price,
+        countInStock: req.body.countInStock,
+        brand: req.body.brand,
+        // rating: req.body.rating,
+        // numReviews: req.body.numReviews,
+        description: req.body.description,
+      });
+      res.status(201).send({
+        message: 'product Updated successfully ',})
+    } else {
+      res.status(404).send({ message: 'product not found' });
+    }
+  })
+);
 export default productRouter;
