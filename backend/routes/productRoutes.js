@@ -79,13 +79,12 @@ productRouter.post(
 );
 
 productRouter.put(
-  `/:id`,upload.single('file'),
+  `/:id`,
   isAdminAuth,
   expressAsyncHandler(async (req, res) => {
     console.log(req)
     const product = await Product.findById(req.params.id);
     if (product) {
-      req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
     //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
     //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
     console.log( req.body.image );
@@ -111,12 +110,13 @@ productRouter.put(
 );
 
 productRouter.put(
-  `/image/:id`,
+  `/image/:id`,upload.single('file'),
   isAdminAuth,
   expressAsyncHandler(async (req, res) => {
     console.log(req)
     const product = await Product.findById(req.params.id);
     if (product) {
+      req.body.image = `https://admin-8gy5.onrender.com/assets/images/` + req.file.filename;
     //  req.body.image = `${window.location.origin}/images/` + req.file.filename;
     //  req.body.image = `http://localhost:5000/images/` + req.file.filename;
     console.log( req.body.image );

@@ -4,7 +4,8 @@ import path from 'path';
 
 const __dirname = path.resolve();
 
-const DIR = './admin/dist/admin/assets/images';
+ const DIR = './admin/dist/admin/assets/images';
+// const DIR = './assets/images';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
