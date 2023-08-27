@@ -20,7 +20,31 @@ export default function ShippingAddressScreen() {
   );
   const [city, setCity] = useState(shippingAddress.city || "");
   const [country, setCountry] = useState(shippingAddress.country || "");
-  const submitHandler = (e) => {
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   ctxDispatch({
+  //     type: "SAVE_SHIPPING_ADDRESS",
+  //     payload: {
+  //       fullName,
+  //       address,
+  //       postalCode,
+  //       city,
+  //       country,
+  //     },
+  //   });
+  //   localStorage.setItem(
+  //     "shippingAddress",
+  //     JSON.stringify({
+  //       fullName,
+  //       address,
+  //       postalCode,
+  //       city,
+  //       country,
+  //     })
+  //   );
+  //   navigate("/payment");
+  // };
+   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
@@ -42,7 +66,7 @@ export default function ShippingAddressScreen() {
         country,
       })
     );
-    navigate("/payment");
+    navigate("/placeorder");
   };
   useEffect(() => {
     if (!userInfo) {

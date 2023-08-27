@@ -70,11 +70,11 @@ export default function PlaceOrderScreen() {
       toast.error(getError(err));
     }
   };
-  useEffect(() => {
-    if (!cart.paymentMethod) {
-      navigate("/payment");
-    }
-  }, [cart, navigate]);
+  // useEffect(() => {
+  //   if (!cart.paymentMethod) {
+  //     navigate("/payment");
+  //   }
+  // }, [cart, navigate]);
   return (
     <div>
       <CheckOutSteps step1 step2 step3 step4 />
@@ -100,7 +100,7 @@ export default function PlaceOrderScreen() {
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
-          <Card className="mb-3">
+          {/* <Card className="mb-3">
             <Card.Body>
               <Card.Title>Payment</Card.Title>
               <Card.Text>
@@ -108,7 +108,7 @@ export default function PlaceOrderScreen() {
               </Card.Text>
               <Link to="/payment">Edit</Link>
             </Card.Body>
-          </Card>
+          </Card> */}
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Items</Card.Title>

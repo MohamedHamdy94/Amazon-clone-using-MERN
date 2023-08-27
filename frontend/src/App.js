@@ -104,7 +104,7 @@ function App() {
                 <Route path="/signin" element={<SigninScreen />} />
                 <Route path="/signup" element={<SignUpScreen />} />
                 <Route path="/shipping" element={<ShippingAddressScreen />} />
-                <Route path="/payment" element={<PaymentScreen />} />
+                {/* <Route path="/payment" element={<PaymentScreen />} /> */}
                 <Route path="/placeorder" element={<PlaceOrderScreen />} />
                 <Route
                   path="/order/:id"
